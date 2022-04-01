@@ -4,14 +4,13 @@ import { useState } from 'react'
 import { applyTheme, themes } from '../src/theme'
 
 const Theme: NextPage = () => {
-  const [light, setlight] = useState(true)
-
   function changeTheme() {
-    if (light) {
-      setlight((prev) => !prev)
+    const theme = window.localStorage.getItem('theme')
+    if (theme === 'base') {
+      window.localStorage.setItem('theme', 'dark')
       applyTheme(themes.dark)
     } else {
-      setlight((prev) => !prev)
+      window.localStorage.setItem('theme', 'base')
       applyTheme(themes.default)
     }
   }

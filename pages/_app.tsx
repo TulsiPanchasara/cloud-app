@@ -8,7 +8,16 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    applyTheme(themes.dark)
+    const theme = window.localStorage.getItem('theme')
+
+    if (theme === 'base') {
+      applyTheme(themes.default)
+    } else if (theme === 'dark') {
+      applyTheme(themes.dark)
+    } else {
+      window.localStorage.setItem('theme', 'base')
+      applyTheme(themes.default)
+    }
   }, [])
 
   return (
