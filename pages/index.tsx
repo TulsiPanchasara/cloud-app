@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import MainContainer from '../components/MainContainer'
 import SecondContainer from '../components/SecondContainer'
+import { Button } from '../src/core/Button/Button'
 
 const Home: NextPage = () => {
   return (
@@ -28,6 +29,8 @@ const Home: NextPage = () => {
 
         <MainContainer />
         <SecondContainer />
+
+        <Button label="Test Button" primary />
       </main>
     </div>
   )
