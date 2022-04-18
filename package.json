@@ -5,10 +5,12 @@
     "build": "next build",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "security-scan": "auditjs ossi"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
+    "auditjs": "^4.0.36",
     "next": "latest",
     "next-i18next": "^10.5.0",
     "next-redux-wrapper": "^7.0.5",
