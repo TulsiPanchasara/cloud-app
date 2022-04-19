@@ -34,6 +34,10 @@ const Home: NextPage = () => {
         <MainContainer />
         <SecondContainer />
 
+        <a href="/theme" className="my-5">
+          Go To THEME Page
+        </a>
+
         <Button label="Test Button" primary />
       </main>
     </div>
