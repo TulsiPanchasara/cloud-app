@@ -1,4 +1,3 @@
-// /** @jsx jsx */
 // import { css, jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
@@ -46,6 +45,7 @@ const Theme: NextPage = () => {
         </p>
 
         <button
+          data-testid="theme-change-button"
           className="mt-4 rounded-md bg-primary-600 px-3 py-2 text-neutral-500 "
           onClick={changeTheme}
         >
