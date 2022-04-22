@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { applyTheme, themes } from '../src/theme'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 // const base = css`
 //   color: hotpink;
@@ -22,6 +23,8 @@ const StyledButton = styled.button`
 `
 
 const Theme: NextPage = () => {
+  //fetching out seesion from useSession hook
+  const { data: session } = useSession()
   function changeTheme() {
     const theme = window.localStorage.getItem('theme')
     if (theme === 'base') {
@@ -40,6 +43,19 @@ const Theme: NextPage = () => {
       </Head>
 
       <main className="flex w-full flex-1 flex-col items-center px-20 pt-10 text-center">
+        {session?.user?.image && (
+          <img
+            src={session?.user?.image}
+            alt=""
+            height={50}
+            width={50}
+            className="rounded-full"
+          />
+        )}
+        <p className="mt-3 text-2xl text-storm-dust-500">
+          Signed in as {session?.user?.name}
+        </p>
+
         <p className="mt-3 text-2xl text-storm-dust-500">
           Click Me to change the THEME
         </p>
@@ -68,9 +84,17 @@ const Theme: NextPage = () => {
         <a className="mt-4" href="/">
           Go to HOME page
         </a>
+
+        <button
+          className="mt-4 rounded-md bg-primary-600 px-3 py-2 text-neutral-500 "
+          onClick={() => signOut()}
+        >
+          Sign Out
+        </button>
       </main>
     </div>
   )
 }
-
+//for pages that need authentication set them Component.auth = true
+;(Theme as any).auth = true
 export default Theme
