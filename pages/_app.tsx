@@ -5,8 +5,10 @@ import { Provider } from 'react-redux'
 import store from '../app/store'
 import { applyTheme, themes } from '../src/theme'
 import '../styles/globals.css'
+import { SessionProvider } from 'next-auth/react'
+import WithAuth from '../src/HOC/WithAuth'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   useEffect(() => {
     const theme = window.localStorage.getItem('theme')
 
@@ -21,9 +23,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        {(Component as any).auth ? (
+          <WithAuth>
+            <Component {...pageProps} />
+          </WithAuth>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </Provider>
+    </SessionProvider>
   )
 }
 
